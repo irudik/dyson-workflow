@@ -153,8 +153,8 @@ Good sources: EconTwitter, Hidden Curriculum Podcast, Shapiro and Gentzkow notes
 
 - Programming
 - Version control
-- Meta-reproducibility
-- Management/organization
+- Code/data management and project organization
+- Time management
 
 ---
 
@@ -440,6 +440,10 @@ Less stuff you need to keep in your brain
 
 If everything is the same, then working with your projects becomes largely automatic, no trying to remember where certain types of data are located, how you organize your coding scripts in run-order, etc
 
+--
+
+Makes life easier to use best practices like relative file paths, `here::here`, etc
+
 ---
 
 # One way to organize data and code
@@ -456,6 +460,26 @@ If everything is the same, then working with your projects becomes largely autom
 
 ---
 
+# Code script organization
+
+A project will likely have multiple files for data cleaning/analysis
+
+--
+
+This largely makes sense: having more modular / function-oriented code is generally better
+
+--
+
+When working with other people (or your future self), it's smart to order your files:
+
+- 01.first-file-to-run
+- 02.second-file-to-run
+- ...
+- 000.project-functions
+- 000.RUN-ALL-SCRIPTS.sh
+
+---
+
 # Centralize and optimize your environments
 
 One recommendation I have is to centralize and optimize your coding environment
@@ -466,7 +490,7 @@ You will often have to use multiple languages
 
 --
 
-Built-in IDEs for many languages are mediocre or just straight up bad
+Built-in IDEs for many languages are mediocre or just straight up bad (hi Stata)
 
 --
 
@@ -482,21 +506,17 @@ There's a lot of options (Atom, emacs, Vim, Sublime Text) but I'll tell you abou
 
 .hi-blue[Visual Studio Code (VSCode)] is probably the most widely used development environment
 
---
-
-I recommend it for .hi[all] economists
-
 <center>
-```{r, out.width = "100%", fig.pos="c", echo = FALSE}
-knitr::include_graphics("figures/vscode.png")
-```
+  ```{r, out.width = "100%", fig.pos="c", echo = FALSE}
+  knitr::include_graphics("figures/vscode.png")
+  ```
 </center>
 
 ---
 
 # Centralize and optimize your environments: VSCode
 
-How does using VSCode improve workflow?
+How does using VSCode (or Atom/Sublime/etc) improve workflow?
 
 1. The environment is the same no matter whether I'm writing in R/Stata/Julia/MATLAB/Python/LaTeX,whatever
 --
@@ -504,35 +524,56 @@ How does using VSCode improve workflow?
 2. VSCode is .hi[highly] customiziable, has useful linting, syntax highlighting, and my fav: bracket matching
 --
 
-3. VSCode has remote development extensions so you can connect to BioHPC, RedCloud, AWS, etc
+3. VSCode has remote development capabilities so you can connect to BioHPC, RedCloud, AWS, etc
 --
 
 4. Fully integrated with Git
 --
 
-5. Lots of useful and customizable hot keys for editing similar to vim or emacs
+5. Lots of useful and customizable hot keys for mass editing
 
 ---
 
 # Tasks and communication
 
+Organizing tasks and project communication is important for actually getting things done
+
+--
+
+There are .hi[many] ways to do this
+
+--
+
+Here's a few suggestions:
+
+1. [GitHub Issues](https://github.com/irudik/climate-trade/issues)
+2. [Slack](https://slack.com)
+3. Other task management providers: [Asana](https://asana.com), [Wrike](https://wrike.com), etc (possibly with Slack)
+
 ---
 
-class: inverse, center, middle
-name: timemanagement
+# Tasks and communication
 
-# Time management and organization
+If you're a Git user I recommend using [GitHub Issues](https://github.com/irudik/climate-trade/issues):
 
-<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+1. Everything's on GitHub
+2. Commits/pull requests etc can be referenced in task-specific issues so changes are easy to find
+3. GitHub has a Projects feature that is similar to Asana/Wrike
 
 ---
 
-class: inverse, center, middle
-name: metareprod
+# Writing
 
-# Meta-reproducibility
+If you've got co-authors I recommend [Overleaf](https://overleaf.com)
 
-<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+--
+
+It's cloud-based, integrates with Dropbox and GitHub, and has a RTF editor for your non-LaTeX co-authors
+
+--
+
+Solo projects: probably use Dropbox or Git+GitHub
+
 
 
 ---
@@ -575,4 +616,68 @@ If you do this you can spin up a full, clean project in ~1 minute
 
 # Cross-project reproducibility
 
-You're going to use the same
+You're going to use the same functions a lot of the time across projects, e.g. here's my base plotting template:
+
+```
+main_theme <- 
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    title = element_text(size = 24),
+    axis.text.x = element_text(size = 24), axis.text.y = element_text(size = 24),
+    axis.title.x = element_text(size = 24), axis.title.y = element_text(size = 24),
+    panel.grid.minor.x = element_blank(), panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(),
+    panel.background = element_rect(fill = "#ffffff", colour = NA),
+    plot.background = element_rect(fill = "#ffffff", colour = NA),
+    axis.line = element_line(colour = "black")
+  )
+```
+
+---
+
+class: inverse, center, middle
+name: timemanagement
+
+# Time management and organization
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Time management
+
+<center>
+  ```{r, out.width = "100%", fig.pos="c", echo = FALSE}
+  knitr::include_graphics("figures/parkinson.png")
+  ```
+</center>
+
+
+---
+
+# Time management
+
+<center>
+  ```{r, out.width = "50%", fig.pos="c", echo = FALSE}
+  knitr::include_graphics("figures/boundaries.jpg")
+  ```
+</center>
+
+---
+
+# Time management
+
+There's a lot of fancy books and stuff on this
+
+--
+
+First-order thing that matters (imo): work when you're most productive
+
+--
+
+I schedule no meetings or obligations in the morning because that's when I like to do research
+
+--
+
+Second-order thing for me: I typically have some task in mind that I want to complete in the next 2-3 hours (e.g. get half my presentation slides done, finishing writing the code to aggregate the CPS to state-level, etc)
